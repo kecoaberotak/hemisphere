@@ -1,9 +1,13 @@
 import React from "react";
 
-const HemisphereDisplay = () => {
+// bisa langsung memanggil value tanpa perlu props.value 
+const HemisphereDisplay = ({latitude}) => {
+    console.log(latitude)
+    const hemisphere = latitude > 0 ? 'Nothern Hemisphere' : 'Southern Hemisphere';
+
     return(
         <div>
-            Hey you are in Northen Hemisphere!
+            {hemisphere}
         </div>
     )
 }

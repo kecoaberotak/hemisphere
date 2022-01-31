@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import HemisphereDisplay from './HemisphereDisplay';
 
 // props bersifat read-only, biasa digunakan untuk mentransfer data dari parent component ke child component
 // state bersifat dinamis, state hanya bisa diakses dalam component dtate itu dibuat, atau diubah dulu ke props agar bisa diakses oleh child component
@@ -8,13 +9,22 @@ import ReactDOM from 'react-dom';
 // memakai class bukan functional component untuk menggunakan state. (tapi sekarang functional component sudah ada fitur hooks yg memungkinkan menggunakan state)
 class App extends React.Component {
 
-    // fungsi constructor akan dijalankan pertama kali, sangat bagus untuk insialisasi state
-    constructor(props){
-        super(props)
+    // // fungsi constructor akan dijalankan pertama kali, sangat bagus untuk insialisasi state atau one time setup
+    // constructor(props){
+    //     super(props)
 
-        // null dujadikan nilai default
-        this.state = {latitude: null, errorMessage: ""}
+    //     // null dujadikan nilai default
+    //     this.state = {latitude: null, errorMessage: ""}
+    // }
 
+
+
+    // cara lain insialisasi state pada class tanpa constructor
+    state = {latitude: null, errorMessage: ""}
+
+
+    // fungsi untuk melakukan load di awal, mirip seperti constructor, tapi fungsi ini bagus bila ingin melakukan load berkali2
+    componentDidMount() {
         // fungsi untuk mengambil lokasi dari user
         window.navigator.geolocation.getCurrentPosition(
             // callback untuk mendapatkan lokasi user
@@ -35,7 +45,7 @@ class App extends React.Component {
         }
         
         if(this.state.latitude && !this.state.errorMessage){
-            return <div>{this.state.latitude}</div>
+            return <div><HemisphereDisplay latitude={this.state.latitude}/></div>
         }
 
         else {
