@@ -16,7 +16,7 @@ class App extends React.Component {
             (error) => {
                 this.setState({errorMessage: error.message})
             }
-        );        
+        );
     }
     render() {
         return(
